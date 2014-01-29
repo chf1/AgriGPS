@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Betrieb"/>
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="Fläche gesamt (ha):" android:layout_column="0" />
+            <TextView android:id="@+id/haGesamt" android:text="Fill" android:layout_column="1" />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="Hoffläche (ha):" />
+            <TextView android:id="@+id/haHof" android:text="Fill"  android:layout_column="1"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="Landwirtschaft (ha):" />
+            <TextView android:id="@+id/haLW" android:text="Fill"  android:layout_column="1"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="Wald (ha):" />
+            <TextView android:id="@+id/haWald" android:text="Fill"  android:layout_column="1"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

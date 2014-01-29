@@ -57,6 +57,24 @@ public class BetriebDao extends SQLiteOpenHelper {
                 "lon real," +
                 "erfdat integer," +
                 "aendat integer)");
+        db.execSQL("create table partner (" +
+                "_id integer primary key autoincrement, " +
+                "name text," +
+                "contact_id integer," + /* 0 paechter, 1 verpaechter */
+                "comment text," +
+                "erfdat integer," +
+                "aendat integer)");
+        db.execSQL("create table vertrag (" +
+                "_id integer primary key autoincrement, " +
+                "id_flur integer," +
+                "typ integer," +   /* 0 pacht */
+                "rolle integer," + /* 0 paechter, 1 verpaechter */
+                "partner_id integer, " +
+                "preis_ha integer, " +
+                "preis_abs integer, " +
+                "comment text," +
+                "erfdat integer," +
+                "aendat integer)");
     }
 
     public Betrieb importiereBetrieb(Betrieb betrieb) {
@@ -72,7 +90,7 @@ public class BetriebDao extends SQLiteOpenHelper {
         values.put("name", betrieb.getName());
         values.put("betriebsnummer", betrieb.getBetriebsnummer());
         values.put("inhaber", betrieb.getInhaber());
-        values.put("beschreibung", betrieb.getBeschreibung());
+        values.put("beschreibung", betrieb.getComment());
         values.put("erfdat", new Date().getTime());
         betrieb.setId(getWritableDatabase().insert("betrieb", null, values));
         return betrieb;
@@ -101,6 +119,14 @@ public class BetriebDao extends SQLiteOpenHelper {
         getWritableDatabase().insert("koord", null, values);
     }
 
+    public void insertPartner(LatLng koord, Long idFlur) {
+        ContentValues values = new ContentValues();
+        values.put("id_flur", idFlur);
+        values.put("lat", koord.latitude);
+        values.put("lon", koord.longitude);
+        getWritableDatabase().insert("koord", null, values);
+    }
+
     public Collection<Betrieb> getBetriebe() {
         List<Betrieb> result = new ArrayList<Betrieb>();
         Cursor cs = getWritableDatabase().rawQuery(
@@ -113,7 +139,7 @@ public class BetriebDao extends SQLiteOpenHelper {
             b.setName(cs.getString(1));
             b.setBetriebsnummer(cs.getString(2));
             b.setInhaber(cs.getString(3));
-            b.setBeschreibung(cs.getString(4));
+            b.setComment(cs.getString(4));
             b.setErfdat(new Date(cs.getInt(5)));
             if (!cs.isNull(6)) {
                 b.setAendat(new Date(cs.getInt(6)));
@@ -137,9 +163,9 @@ public class BetriebDao extends SQLiteOpenHelper {
             flur.setGemarkung(cs.getString(2));
             flur.setFlurnummer(cs.getString(3));
             flur.setName(cs.getString(4));
-            flur.setDtErfasst(new Date(cs.getInt(5)));
+            flur.setErfdat(new Date(cs.getInt(5)));
             if (!cs.isNull(5)) {
-                flur.setDtAenderung(new Date(cs.getInt(6)));
+                flur.setAendat(new Date(cs.getInt(6)));
             }
             Cursor cs2 = getReadableDatabase().rawQuery("select lat, lon from koord where id_flur = ? order by _id asc",
                     new String[]{flur.getId() + ""});

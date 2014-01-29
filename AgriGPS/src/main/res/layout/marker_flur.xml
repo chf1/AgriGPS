@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/name"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Name:Typ"/>
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="Flurnummer:" />
+            <TextView android:id="@+id/flurnummer" android:text="Fill"  android:layout_column="1"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="Fläche:" />
+            <TextView android:id="@+id/flaeche" android:text="Fill"  android:layout_column="1"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="Status:" />
+            <TextView android:id="@+id/status" android:text="Fill"  android:layout_column="1"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView android:text="Sonstiges:" android:layout_column="0" />
+            <TextView android:id="@+id/comment" android:text="Fill" android:layout_column="1" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
